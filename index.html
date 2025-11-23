@@ -1,0 +1,390 @@
+
+import React, { useState, useEffect } from 'react';
+import { Gamepad2, TrendingUp, Brain, Zap, DollarSign, FileText, Mail } from 'lucide-react';
+
+export default function Portfolio() {
+  const [activeSection, setActiveSection] = useState('about');
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const sections = [
+    { id: 'about', label: 'About', icon: Gamepad2 },
+    { id: 'problems', label: 'Problems I Solve', icon: Brain },
+    { id: 'services', label: 'Services', icon: Zap },
+    { id: 'cases', label: 'Case Studies', icon: TrendingUp },
+    { id: 'pricing', label: 'Pricing', icon: DollarSign },
+    { id: 'contact', label: 'Contact', icon: Mail }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-100">
+      {/* Hero Section */}
+      <div className={`relative overflow-hidden transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20" />
+        <div className="relative max-w-6xl mx-auto px-6 py-16 text-center">
+          <div className="inline-block mb-4 px-4 py-2 bg-purple-500/20 rounded-full border border-purple-500/30 backdrop-blur-sm">
+            <span className="text-purple-300 text-sm font-semibold">ROBLOX GAME STRATEGIST</span>
+          </div>
+          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            PangaDev
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Transforming simple ideas into addictive, high-retention games that trend and monetize
+          </p>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="sticky top-0 z-50 backdrop-blur-lg bg-gray-900/80 border-b border-gray-700/50">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex overflow-x-auto scrollbar-hide gap-2 py-4">
+            {sections.map((section, index) => {
+              const Icon = section.icon;
+              return (
+                <button
+                  key={section.id}
+                  onClick={() => setActiveSection(section.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 ${
+                    activeSection === section.id
+                      ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
+                      : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-200'
+                  }`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <Icon size={18} />
+                  <span className="text-sm font-medium">{section.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        {/* About Section */}
+        {activeSection === 'about' && (
+          <div className="animate-fadeIn">
+            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                <span className="text-4xl">👋</span>
+                <span>About Me</span>
+              </h2>
+              <div className="space-y-4 text-gray-300 leading-relaxed">
+                <p>
+                  I'm a Roblox Game Strategist focused on <span className="text-purple-400 font-semibold">core loops</span>, <span className="text-purple-400 font-semibold">fun progression</span>, <span className="text-purple-400 font-semibold">retention psychology</span>, and <span className="text-purple-400 font-semibold">monetization systems</span>.
+                </p>
+                <p>
+                  I help small developers turn simple ideas into addictive, trending, high-retention games.
+                </p>
+                <p className="text-lg text-purple-300 font-semibold pt-4">
+                  My goal: Make your game grow faster, keep players engaged longer, and increase revenue without ruining the experience.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Problems Section */}
+        {activeSection === 'problems' && (
+          <div className="animate-fadeIn">
+            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                <span className="text-4xl">🎯</span>
+                <span>What Problems I Solve</span>
+              </h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {[
+                  'Low player retention',
+                  'Unclear or boring core loops',
+                  'Weak progression pacing',
+                  'Bad monetization structure',
+                  'No trend angle or "hook"',
+                  'Players leaving early due to lack of early dopamine'
+                ].map((problem, index) => (
+                  <div
+                    key={index}
+                    className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 hover:bg-red-500/20 transition-all duration-300 hover:scale-105"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <p className="text-gray-200 flex items-start gap-2">
+                      <span className="text-red-400 mt-1">▸</span>
+                      <span>{problem}</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Services Section */}
+        {activeSection === 'services' && (
+          <div className="animate-fadeIn">
+            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                <span className="text-4xl">🧩</span>
+                <span>What I Offer</span>
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  'Core loop design',
+                  'Trend-based game ideas',
+                  'Progression + economy planning',
+                  'Retention strategy',
+                  'Monetization systems',
+                  'Game concept documents',
+                  'Player psychology insights'
+                ].map((service, index) => (
+                  <div
+                    key={index}
+                    className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <p className="text-gray-200 flex items-start gap-2">
+                      <span className="text-purple-400 mt-1">▸</span>
+                      <span>{service}</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Case Studies Section */}
+        {activeSection === 'cases' && (
+          <div className="animate-fadeIn space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2 flex items-center justify-center gap-3">
+                <span className="text-4xl">📊</span>
+                <span>Case Studies</span>
+              </h2>
+            </div>
+
+            {/* Case 1 */}
+            <div className="bg-gradient-to-br from-green-900/20 to-gray-900/50 rounded-2xl p-8 border border-green-700/30 backdrop-blur-sm hover:border-green-500/50 transition-all duration-300">
+              <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span className="text-3xl">🌲</span>
+                <span className="text-green-400">99 Nights in the Forest</span>
+              </h3>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-semibold text-purple-300 mb-2">Why it works:</h4>
+                  <ul className="space-y-2 text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      <span>Clear loop (survive ➡️ gather ➡️ build)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      <span>Predictable progression + visual upgrades</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      <span>Constant dopamine rewards (wood, expansions)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      <span>Survival pressure keeps players engaged</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      <span>Hits Maslow's needs: safety ➡️ comfort ➡️ mastery</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-green-500/10 rounded-lg p-4 border-l-4 border-green-500">
+                  <p className="text-green-300 font-semibold">My takeaway:</p>
+                  <p className="text-gray-300">Players always have something meaningful to do next — no empty moments, no confusion.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Case 2 */}
+            <div className="bg-gradient-to-br from-emerald-900/20 to-gray-900/50 rounded-2xl p-8 border border-emerald-700/30 backdrop-blur-sm hover:border-emerald-500/50 transition-all duration-300">
+              <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span className="text-3xl">🌱</span>
+                <span className="text-emerald-400">Grow a Garden</span>
+              </h3>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-semibold text-purple-300 mb-2">Why it works:</h4>
+                  <ul className="space-y-2 text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Very simple loop (plant ➡️ grow ➡️ collect)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Anticipation dopamine (waiting ➡️ reward)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Satisfying transformation</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Tiny constant upgrades</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Easy monetization without pressure</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-emerald-500/10 rounded-lg p-4 border-l-4 border-emerald-500">
+                  <p className="text-emerald-300 font-semibold">My takeaway:</p>
+                  <p className="text-gray-300">The game succeeds because everything feels good — fast, constant rewards keep players hooked.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Case 3 */}
+            <div className="bg-gradient-to-br from-yellow-900/20 to-gray-900/50 rounded-2xl p-8 border border-yellow-700/30 backdrop-blur-sm hover:border-yellow-500/50 transition-all duration-300">
+              <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span className="text-3xl">🎰</span>
+                <span className="text-yellow-400">Spin a Brainrot</span>
+              </h3>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-semibold text-purple-300 mb-2">Why it works:</h4>
+                  <ul className="space-y-2 text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-400 mt-1">•</span>
+                      <span>High-frequency dopamine (spin ➡️ reward)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-400 mt-1">•</span>
+                      <span>Surprises + rarity system</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-400 mt-1">•</span>
+                      <span>Instantly understandable</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-400 mt-1">•</span>
+                      <span>Cheap impulse monetization</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-yellow-400 mt-1">•</span>
+                      <span>Huge trend advantage</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-yellow-500/10 rounded-lg p-4 border-l-4 border-yellow-500">
+                  <p className="text-yellow-300 font-semibold">My takeaway:</p>
+                  <p className="text-gray-300">Every action feels like risk-free gambling, so players stay longer and spend easily.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Before/After */}
+            <div className="bg-gradient-to-br from-blue-900/20 to-gray-900/50 rounded-2xl p-8 border border-blue-700/30 backdrop-blur-sm">
+              <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span className="text-3xl">⚙️</span>
+                <span className="text-blue-400">Before / After Example</span>
+              </h3>
+              <div className="space-y-4">
+                <div className="bg-red-500/10 rounded-lg p-4 border-l-4 border-red-500">
+                  <p className="text-red-300 font-semibold">Problem:</p>
+                  <p className="text-gray-300">Players leave after 2–3 minutes.</p>
+                </div>
+                <div className="bg-yellow-500/10 rounded-lg p-4 border-l-4 border-yellow-500">
+                  <p className="text-yellow-300 font-semibold">Fix:</p>
+                  <p className="text-gray-300">Added simple loop, faster early progression, clearer reward pacing.</p>
+                </div>
+                <div className="bg-green-500/10 rounded-lg p-4 border-l-4 border-green-500">
+                  <p className="text-green-300 font-semibold">Result:</p>
+                  <p className="text-gray-300">Higher early retention + more returning players.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Pricing Section */}
+        {activeSection === 'pricing' && (
+          <div className="animate-fadeIn">
+            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                <span className="text-4xl">💼</span>
+                <span>Pricing</span>
+              </h2>
+              <div className="space-y-6">
+                <div className="bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-xl p-8 border border-purple-500/30 text-center">
+                  <p className="text-5xl font-bold text-purple-400 mb-2">5-10K Robux</p>
+                  <p className="text-xl text-gray-300 mb-4">per consultation</p>
+                  <p className="text-lg text-gray-400">(or 50-100 USD/€) preferable</p>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700/50">
+                    <p className="text-green-400 font-semibold mb-2">✓ Custom pricing accepted</p>
+                    <p className="text-gray-400 text-sm">Flexible options available</p>
+                  </div>
+                  <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700/50">
+                    <p className="text-blue-400 font-semibold mb-2">✓ Payment methods</p>
+                    <p className="text-gray-400 text-sm">Only Robux or USD/€</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Contact Section */}
+        {activeSection === 'contact' && (
+          <div className="animate-fadeIn">
+            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+                <span className="text-4xl">📬</span>
+                <span>Contact</span>
+              </h2>
+              <div className="space-y-4 max-w-2xl mx-auto">
+                <a
+                  href="https://discord.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/20"
+                >
+                  <div className="bg-indigo-500 rounded-full p-3">
+                    <Mail size={24} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-400">Discord</p>
+                    <p className="text-xl font-semibold text-indigo-300">@PangaDev</p>
+                  </div>
+                </a>
+                <a
+                  href="https://twitter.com/M7tank"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30 rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
+                >
+                  <div className="bg-blue-500 rounded-full p-3">
+                    <Mail size={24} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-400">Twitter</p>
+                    <p className="text-xl font-semibold text-blue-300">@M7tank</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="border-t border-gray-700/50 mt-16">
+        <div className="max-w-6xl mx-auto px-6 py-8 text-center text-gray-500">
+          <p>© 2024 PangaDev. All rights reserved.</p>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          f
