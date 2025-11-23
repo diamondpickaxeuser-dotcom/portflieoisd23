@@ -1,297 +1,479 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PangaDev - Roblox Game Strategist</title>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  
-  <style>
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fadeIn { animation: fadeIn 0.6s ease-out forwards; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PangaDev - Roblox Game Strategist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        * {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-100">
-
-<div id="root"></div>
-
-<script type="module">
-  import React from "https://esm.sh/react@18";
-  import ReactDOM from "https://esm.sh/react-dom@18";
-
-  const { useState, useEffect } = React;
-
-  // Lucide icons mapping
-  const icons = {
-    Gamepad2: lucide.Gamepad2,
-    Brain: lucide.Brain,
-    Zap: lucide.Zap,
-    TrendingUp: lucide.TrendingUp,
-    DollarSign: lucide.DollarSign,
-    FileText: lucide.FileText,
-    Mail: lucide.Mail,
-  };
-
-  function Portfolio() {
-    const [activeSection, setActiveSection] = useState('about');
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-      setIsVisible(true);
-      lucide.createIcons(); // Initialize Lucide icons
-    }, []);
-
-    const sections = [
-      { id: 'about', label: 'About', icon: icons.Gamepad2 },
-      { id: 'problems', label: 'Problems I Solve', icon: icons.Brain },
-      { id: 'services', label: 'Services', icon: icons.Zap },
-      { id: 'cases', label: 'Case Studies', icon: icons.TrendingUp },
-      { id: 'pricing', label: 'Pricing', icon: icons.DollarSign },
-      { id: 'contact', label: 'Contact', icon: icons.Mail }
-    ];
-
-    const IconComponent = ({ name, size = 18 }) => {
-      const Icon = icons[name];
-      return Icon ? React.createElement(Icon, { size }) : null;
-    };
-
-    return (
-      <div>
-        {/* Hero */}
-        <div className={`relative overflow-hidden transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20" />
-          <div className="relative max-w-6xl mx-auto px-6 py-16 text-center">
-            <div className="inline-block mb-4 px-4 py-2 bg-purple-500/20 rounded-full border border-purple-500/30 backdrop-blur-sm">
-              <span className="text-purple-300 text-sm font-semibold">ROBLOX GAME STRATEGIST</span>
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20"></div>
+        <div class="relative max-w-6xl mx-auto px-6 py-16 text-center animate-fadeIn">
+            <div class="inline-block mb-4 px-4 py-2 bg-purple-500/20 rounded-full border border-purple-500/30 backdrop-blur-sm">
+                <span class="text-purple-300 text-sm font-semibold">ROBLOX GAME STRATEGIST</span>
             </div>
-            <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              PangaDev
+            <h1 class="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                PangaDev
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Transforming simple ideas into addictive, high-retention games that trend and monetize
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                Transforming simple ideas into addictive, high-retention games that trend and monetize
             </p>
-          </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="sticky top-0 z-50 backdrop-blur-lg bg-gray-900/80 border-b border-gray-700/50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex overflow-x-auto scrollbar-hide gap-2 py-4">
+                <button onclick="showSection('about')" class="nav-btn flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 bg-purple-600 text-white shadow-lg shadow-purple-500/50" data-section="about">
+                    <span>📱</span>
+                    <span class="text-sm font-medium">About</span>
+                </button>
+                <button onclick="showSection('problems')" class="nav-btn flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-200" data-section="problems">
+                    <span>🧠</span>
+                    <span class="text-sm font-medium">Problems I Solve</span>
+                </button>
+                <button onclick="showSection('services')" class="nav-btn flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-200" data-section="services">
+                    <span>⚡</span>
+                    <span class="text-sm font-medium">Services</span>
+                </button>
+                <button onclick="showSection('cases')" class="nav-btn flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-200" data-section="cases">
+                    <span>📈</span>
+                    <span class="text-sm font-medium">Case Studies</span>
+                </button>
+                <button onclick="showSection('pricing')" class="nav-btn flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-200" data-section="pricing">
+                    <span>💰</span>
+                    <span class="text-sm font-medium">Pricing</span>
+                </button>
+                <button onclick="showSection('contact')" class="nav-btn flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-200" data-section="contact">
+                    <span>📧</span>
+                    <span class="text-sm font-medium">Contact</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-6xl mx-auto px-6 py-12">
+        <!-- About Section -->
+        <div id="about-section" class="section-content active animate-fadeIn">
+            <div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                    <span class="text-4xl">👋</span>
+                    <span>About Me</span>
+                </h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        I'm a Roblox Game Strategist focused on <span class="text-purple-400 font-semibold">core loops</span>, <span class="text-purple-400 font-semibold">fun progression</span>, <span class="text-purple-400 font-semibold">retention psychology</span>, and <span class="text-purple-400 font-semibold">monetization systems</span>.
+                    </p>
+                    <p>
+                        I help small developers turn simple ideas into addictive, trending, high-retention games.
+                    </p>
+                    <p class="text-lg text-purple-300 font-semibold pt-4">
+                        My goal: Make your game grow faster, keep players engaged longer, and increase revenue without ruining the experience.
+                    </p>
+                </div>
+            </div>
         </div>
 
-        {/* Sticky Navigation */}
-        <div className="sticky top-0 z-50 backdrop-blur-lg bg-gray-900/80 border-b border-gray-700/50">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="flex overflow-x-auto scrollbar-hide gap-2 py-4">
-              {sections.map((section, index) => {
-                const Icon = section.icon;
-                return (
-                  <button
-                    key={section.id}
-                    onClick={() => setActiveSection(section.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-300 ${
-                      activeSection === section.id
-                        ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
-                        : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-200'
-                    }`}
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    {Icon && <Icon size={18} />}
-                    <span className="text-sm font-medium">{section.label}</span>
-                  </button>
-                );
-              })}
+        <!-- Problems Section -->
+        <div id="problems-section" class="section-content">
+            <div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm animate-fadeIn">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                    <span class="text-4xl">🎯</span>
+                    <span>What Problems I Solve</span>
+                </h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 hover:bg-red-500/20 transition-all duration-300 hover:scale-105">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-red-400 mt-1">▸</span>
+                            <span>Low player retention</span>
+                        </p>
+                    </div>
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 hover:bg-red-500/20 transition-all duration-300 hover:scale-105">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-red-400 mt-1">▸</span>
+                            <span>Unclear or boring core loops</span>
+                        </p>
+                    </div>
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 hover:bg-red-500/20 transition-all duration-300 hover:scale-105">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-red-400 mt-1">▸</span>
+                            <span>Weak progression pacing</span>
+                        </p>
+                    </div>
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 hover:bg-red-500/20 transition-all duration-300 hover:scale-105">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-red-400 mt-1">▸</span>
+                            <span>Bad monetization structure</span>
+                        </p>
+                    </div>
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 hover:bg-red-500/20 transition-all duration-300 hover:scale-105">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-red-400 mt-1">▸</span>
+                            <span>No trend angle or "hook"</span>
+                        </p>
+                    </div>
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 hover:bg-red-500/20 transition-all duration-300 hover:scale-105">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-red-400 mt-1">▸</span>
+                            <span>Players leaving early due to lack of early dopamine</span>
+                        </p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
 
-        {/* Main Content */}
-        <div className="max-w-6xl mx-auto px-6 py-12">
-
-          {/* About */}
-          {activeSection === 'about' && (
-            <div className="animate-fadeIn">
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
-                <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                  <span className="text-4xl">Wave</span> About Me
+        <!-- Services Section -->
+        <div id="services-section" class="section-content">
+            <div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm animate-fadeIn">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                    <span class="text-4xl">🧩</span>
+                    <span>What I Offer</span>
                 </h2>
-                <div className="space-y-4 text-gray-300 leading-relaxed">
-                  <p>I'm a Roblox Game Strategist focused on <span className="text-purple-400 font-semibold">core loops</span>, <span className="text-purple-400 font-semibold">fun progression</span>, <span className="text-purple-400 font-semibold">retention psychology</span>, and <span className="text-purple-400 font-semibold">monetization systems</span>.</p>
-                  <p>I help small developers turn simple ideas into addictive, trending, high-retention games.</p>
-                  <p className="text-lg text-purple-300 font-semibold pt-4">
-                    My goal: Make your game grow faster, keep players engaged longer, and increase revenue without ruining the experience.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Problems */}
-          {activeSection === 'problems' && (
-            <div className="animate-fadeIn">
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
-                <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                  <span className="text-4xl">Target</span> What Problems I Solve
-                </h2>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {[
-                    'Low player retention',
-                    'Unclear or boring core loops',
-                    'Weak progression pacing',
-                    'Bad monetization structure',
-                    'No trend angle or "hook"',
-                    'Players leaving early due to lack of early dopamine'
-                  ].map((problem, i) => (
-                    <div key={i} className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 hover:bg-red-500/20 transition-all duration-300 hover:scale-105" style={{animationDelay: `${i*100}ms`}}>
-                      <p className="text-gray-200 flex items-start gap-2">
-                        <span className="text-red-400 mt-1">Right Arrow</span> {problem}
-                      </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-purple-400 mt-1">▸</span>
+                            <span>Core loop design</span>
+                        </p>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Services */}
-          {activeSection === 'services' && (
-            <div className="animate-fadeIn">
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
-                <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                  <span className="text-4xl">Puzzle Piece</span> What I Offer
-                </h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    'Core loop design',
-                    'Trend-based game ideas',
-                    'Progression + economy planning',
-                    'Retention strategy',
-                    'Monetization systems',
-                    'Game concept documents',
-                    'Player psychology insights'
-                  ].map((service, i) => (
-                    <div key={i} className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20" style={{animationDelay: `${i*100}ms`}}>
-                      <p className="text-gray-200 flex items-start gap-2">
-                        <span className="text-purple-400 mt-1">Right Arrow</span> {service}
-                      </p>
+                    <div class="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-purple-400 mt-1">▸</span>
+                            <span>Trend-based game ideas</span>
+                        </p>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Case Studies */}
-          {activeSection === 'cases' && (
-            <div className="animate-fadeIn space-y-6">
-              <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold mb-2 flex items-center justify-center gap-3">
-                  <span className="text-4xl">Bar Chart</span> Case Studies
-                </h2>
-              </div>
-
-              {/* Case 1 */}
-              <div className="bg-gradient-to-br from-green-900/20 to-gray-900/50 rounded-2xl p-8 border border-green-700/30 backdrop-blur-sm hover:border-green-500/50 transition-all">
-                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                  <span className="text-3xl">Tree</span> <span className="text-green-400">99 Nights in the Forest</span>
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-lg font-semibold text-purple-300 mb-2">Why it works:</h4>
-                    <ul className="space-y-2 text-gray-300">
-                      <li className="flex items-start gap-2"><span className="text-green-400 mt-1">•</span> Clear loop (survive gather build)</li>
-                      <li className="flex items-start gap-2"><span className="text-green-400 mt-1">•</span> Predictable progression + visual upgrades</li>
-                      <li className="flex items-start gap-2"><span className="text-green-400 mt-1">•</span> Constant dopamine rewards</li>
-                      <li className="flex items-start gap-2"><span className="text-green-400 mt-1">•</span> Survival pressure keeps players engaged</li>
-                      <li className="flex items-start gap-2"><span className="text-green-400 mt-1">•</span> Hits Maslow's needs</li>
-                    </ul>
-                  </div>
-                  <div className="bg-green-500/10 rounded-lg p-4 border-l-4 border-green-500">
-                    <p className="text-green-300 font-semibold">My takeaway:</p>
-                    <p>Players always have something meaningful to do next — no empty moments.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* More cases (shortened for brevity – you can paste the rest) */}
-              <div className="bg-gradient-to-br from-emerald-900/20 to-gray-900/50 rounded-2xl p-8 border border-emerald-700/30 backdrop-blur-sm hover:border-emerald-500/50">
-                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                  <span className="text-3xl">Seedling</span> <span className="text-emerald-400">Grow a Garden</span>
-                </h3>
-                <p className="text-gray-300">Simple, satisfying, high-retention loop with anticipation dopamine.</p>
-              </div>
-
-              <div className="bg-gradient-to-br from-yellow-900/20 to-gray-900/50 rounded-2xl p-8 border border-yellow-700/30 backdrop-blur-sm hover:border-yellow-500/50">
-                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                  <span className="text-3xl">Slot Machine</span> <span className="text-yellow-400">Spin a Brainrot</span>
-                </h3>
-                <p className="text-gray-300">High-frequency dopamine + trend = viral success.</p>
-              </div>
-            </div>
-          )}
-
-          {/* Pricing */}
-          {activeSection === 'pricing' && (
-            <div className="animate-fadeIn">
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
-                <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                  <span className="text-4xl">Briefcase</span> Pricing
-                </h2>
-                <div className="space-y-6">
-                  <div className="bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-xl p-8 border border-purple-500/30 text-center">
-                    <p className="text-5xl font-bold text-purple-400 mb-2">5-10K Robux</p>
-                    <p className="text-xl text-gray-300 mb-4">per consultation</p>
-                    <p className="text-lg text-gray-400">(or 50-100 USD/€ preferred)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Contact */}
-          {activeSection === 'contact' && (
-            <div className="animate-fadeIn">
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm">
-                <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-                  <span className="text-4xl">Envelope</span> Contact
-                </h2>
-                <div className="space-y-4 max-w-2xl mx-auto">
-                  <a href="https://discord.com/users/123456789" target="_blank" className="flex items-center gap-4 bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 rounded-xl p-6 transition-all hover:scale-105">
-                    <div className="bg-indigo-500 rounded-full p-3"><i data-lucide="mail"></i></div>
-                    <div>
-                      <p className="text-sm text-gray-400">Discord</p>
-                      <p className="text-xl font-semibold text-indigo-300">@PangaDev</p>
+                    <div class="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-purple-400 mt-1">▸</span>
+                            <span>Progression + economy planning</span>
+                        </p>
                     </div>
-                  </a>
-                  <a href="https://twitter.com/M7tank" target="_blank" className="flex items-center gap-4 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30 rounded-xl p-6 transition-all hover:scale-105">
-                    <div className="bg-blue-500 rounded-full p-3"><i data-lucide="mail"></i></div>
-                    <div>
-                      <p className="text-sm text-gray-400">Twitter / X</p>
-                      <p className="text-xl font-semibold text-blue-300">@M7tank</p>
+                    <div class="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-purple-400 mt-1">▸</span>
+                            <span>Retention strategy</span>
+                        </p>
                     </div>
-                  </a>
+                    <div class="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-purple-400 mt-1">▸</span>
+                            <span>Monetization systems</span>
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-purple-400 mt-1">▸</span>
+                            <span>Game concept documents</span>
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-5 hover:border-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                        <p class="text-gray-200 flex items-start gap-2">
+                            <span class="text-purple-400 mt-1">▸</span>
+                            <span>Player psychology insights</span>
+                        </p>
+                    </div>
                 </div>
-              </div>
             </div>
-          )}
         </div>
 
-        {/* Footer */}
-        <div className="border-t border-gray-700/50 mt-16">
-          <div className="max-w-6xl mx-auto px-6 py-8 text-center text-gray-500">
-            <p>© 2025 PangaDev. Made with addiction science.</p>
-          </div>
+        <!-- Case Studies Section -->
+        <div id="cases-section" class="section-content">
+            <div class="space-y-6 animate-fadeIn">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-2 flex items-center justify-center gap-3">
+                        <span class="text-4xl">📊</span>
+                        <span>Case Studies</span>
+                    </h2>
+                </div>
+
+                <!-- Case 1 -->
+                <div class="bg-gradient-to-br from-green-900/20 to-gray-900/50 rounded-2xl p-8 border border-green-700/30 backdrop-blur-sm hover:border-green-500/50 transition-all duration-300">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                        <span class="text-3xl">🌲</span>
+                        <span class="text-green-400">99 Nights in the Forest</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-purple-300 mb-2">Why it works:</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-green-400 mt-1">•</span>
+                                    <span>Clear loop (survive ➡️ gather ➡️ build)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-green-400 mt-1">•</span>
+                                    <span>Predictable progression + visual upgrades</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-green-400 mt-1">•</span>
+                                    <span>Constant dopamine rewards (wood, expansions)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-green-400 mt-1">•</span>
+                                    <span>Survival pressure keeps players engaged</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-green-400 mt-1">•</span>
+                                    <span>Hits Maslow's needs: safety ➡️ comfort ➡️ mastery</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-500/10 rounded-lg p-4 border-l-4 border-green-500">
+                            <p class="text-green-300 font-semibold">My takeaway:</p>
+                            <p class="text-gray-300">Players always have something meaningful to do next — no empty moments, no confusion.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="bg-gradient-to-br from-emerald-900/20 to-gray-900/50 rounded-2xl p-8 border border-emerald-700/30 backdrop-blur-sm hover:border-emerald-500/50 transition-all duration-300">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                        <span class="text-3xl">🌱</span>
+                        <span class="text-emerald-400">Grow a Garden</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-purple-300 mb-2">Why it works:</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-400 mt-1">•</span>
+                                    <span>Very simple loop (plant ➡️ grow ➡️ collect)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-400 mt-1">•</span>
+                                    <span>Anticipation dopamine (waiting ➡️ reward)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-400 mt-1">•</span>
+                                    <span>Satisfying transformation</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-400 mt-1">•</span>
+                                    <span>Tiny constant upgrades</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-400 mt-1">•</span>
+                                    <span>Easy monetization without pressure</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-emerald-500/10 rounded-lg p-4 border-l-4 border-emerald-500">
+                            <p class="text-emerald-300 font-semibold">My takeaway:</p>
+                            <p class="text-gray-300">The game succeeds because everything feels good — fast, constant rewards keep players hooked.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 3 -->
+                <div class="bg-gradient-to-br from-yellow-900/20 to-gray-900/50 rounded-2xl p-8 border border-yellow-700/30 backdrop-blur-sm hover:border-yellow-500/50 transition-all duration-300">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                        <span class="text-3xl">🎰</span>
+                        <span class="text-yellow-400">Spin a Brainrot</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-purple-300 mb-2">Why it works:</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-yellow-400 mt-1">•</span>
+                                    <span>High-frequency dopamine (spin ➡️ reward)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-yellow-400 mt-1">•</span>
+                                    <span>Surprises + rarity system</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-yellow-400 mt-1">•</span>
+                                    <span>Instantly understandable</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-yellow-400 mt-1">•</span>
+                                    <span>Cheap impulse monetization</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-yellow-400 mt-1">•</span>
+                                    <span>Huge trend advantage</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-yellow-500/10 rounded-lg p-4 border-l-4 border-yellow-500">
+                            <p class="text-yellow-300 font-semibold">My takeaway:</p>
+                            <p class="text-gray-300">Every action feels like risk-free gambling, so players stay longer and spend easily.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Before/After -->
+                <div class="bg-gradient-to-br from-blue-900/20 to-gray-900/50 rounded-2xl p-8 border border-blue-700/30 backdrop-blur-sm">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                        <span class="text-3xl">⚙️</span>
+                        <span class="text-blue-400">Before / After Example</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-red-500/10 rounded-lg p-4 border-l-4 border-red-500">
+                            <p class="text-red-300 font-semibold">Problem:</p>
+                            <p class="text-gray-300">Players leave after 2–3 minutes.</p>
+                        </div>
+                        <div class="bg-yellow-500/10 rounded-lg p-4 border-l-4 border-yellow-500">
+                            <p class="text-yellow-300 font-semibold">Fix:</p>
+                            <p class="text-gray-300">Added simple loop, faster early progression, clearer reward pacing.</p>
+                        </div>
+                        <div class="bg-green-500/10 rounded-lg p-4 border-l-4 border-green-500">
+                            <p class="text-green-300 font-semibold">Result:</p>
+                            <p class="text-gray-300">Higher early retention + more returning players.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    );
-  }
 
-  ReactDOM.createRoot(document.getElementById('root')).render(<Portfolio />);
-</script>
+        <!-- Pricing Section -->
+        <div id="pricing-section" class="section-content">
+            <div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm animate-fadeIn">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                    <span class="text-4xl">💼</span>
+                    <span>Pricing</span>
+                </h2>
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-xl p-8 border border-purple-500/30 text-center">
+                        <p class="text-5xl font-bold text-purple-400 mb-2">5-10K Robux</p>
+                        <p class="text-xl text-gray-300 mb-4">per consultation</p>
+                        <p class="text-lg text-gray-400">(or 50-100 USD/€) preferable</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700/50">
+                            <p class="text-green-400 font-semibold mb-2">✓ Custom pricing accepted</p>
+                            <p class="text-gray-400 text-sm">Flexible options available</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-6 border border-gray-700/50">
+                            <p class="text-blue-400 font-semibold mb-2">✓ Payment methods</p>
+                            <p class="text-gray-400 text-sm">Only Robux or USD/€</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Contact Section -->
+        <div id="contact-section" class="section-content">
+            <div class="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-gray-700/50 backdrop-blur-sm animate-fadeIn">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                    <span class="text-4xl">📬</span>
+                    <span>Contact</span>
+                </h2>
+                <div class="space-y-4 max-w-2xl mx-auto">
+                    <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/20">
+                        <div class="bg-indigo-500 rounded-full p-3 text-white">
+                            📧
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400">Discord</p>
+                            <p class="text-xl font-semibold text-indigo-300">@PangaDev</p>
+                        </div>
+                    </a>
+                    <a href="https://twitter.com/M7tank" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30 rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20">
+                        <div class="bg-blue-500 rounded-full p-3 text-white">
+                            🐦
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400">Twitter</p>
+                            <p class="text-xl font-semibold text-blue-300">@M7tank</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="border-t border-gray-700/50 mt-16">
+        <div class="max-w-6xl mx-auto px-6 py-8 text-center text-gray-500">
+            <p>© 2024 PangaDev. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const activeSection = document.getElementById(sectionId + '-section');
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+
+            // Update nav buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                if (btn.getAttribute('data-section') === sectionId) {
+                    btn.classList.remove('bg-gray-800/50', 'text-gray-400');
+                    btn.classList.add('bg-purple-600', 'text-white', 'shadow-lg', 'shadow-purple-500/50');
+                } else {
+                    btn.classList.remove('bg-purple-600', 'text-white', 'shadow-lg', 'shadow-purple-500/50');
+                    btn.classList.add('bg-gray-800/50', 'text-gray-400');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
